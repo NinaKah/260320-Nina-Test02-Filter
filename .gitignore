@@ -16,3 +16,7 @@
 *.mdb
 *.opendb
 *.VC.db
+ 
+# Allow this specific WebGL build for GitHub Pages
+!My project_260320-Nina-Test02-Filter/Build/
+!My project_260320-Nina-Test02-Filter/Build/260320-Nina-Test02-Filter_build-01/**
