@@ -3,9 +3,29 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | My project_260320-Nina-Test02-Filter</title>
+    <title>My project_260320-Nina-Test02-Filter</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: #ffffff;
+      }
+      #unity-container {
+        width: 100%;
+        height: 100%;
+      }
+      #unity-canvas {
+        width: 100% !important;
+        height: 100% !important;
+      }
+      /* Footer mit Logos/Titel ausblenden */
+      #unity-footer {
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
@@ -100,10 +120,9 @@
 
         unityShowBanner('WebGL builds are not supported on mobile devices.');
       } else {
-        // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
-
-        canvas.style.width = "960px";
-        canvas.style.height = "600px";
+        // Desktop: Canvas füllt den ganzen Viewport (Größe wird über CSS gesetzt)
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
       }
 
       loadingBar.style.display = "block";
