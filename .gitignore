@@ -20,3 +20,7 @@
 # Allow this specific WebGL build for GitHub Pages
 !My project_260320-Nina-Test02-Filter/Build/
 !My project_260320-Nina-Test02-Filter/Build/260320-Nina-Test02-Filter_build-01/**
+!My project_260320-Nina-Test02-Filter/Build/260320-Nina-Test02-Filter_build-02/**
+
+# OS junk
+.DS_Store
