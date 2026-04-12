@@ -5,6 +5,7 @@ public class SimpleFlyCamera : MonoBehaviour
     public float moveSpeed = 4f;
     public float sprintMultiplier = 2f;
     public float lookSensitivity = 2f;
+    public float scrollZoomSpeed = 8f;
 
     private float yaw;
     private float pitch;
@@ -75,6 +76,13 @@ public class SimpleFlyCamera : MonoBehaviour
         // Vertikalbewegung über Q/E
         if (Input.GetKey(KeyCode.E)) move += Vector3.up * speed * Time.deltaTime;
         if (Input.GetKey(KeyCode.Q)) move += Vector3.down * speed * Time.deltaTime;
+
+        // Scrollrad / Trackpad-Geste: vor/zurück zoomen entlang Blickrichtung
+        float scroll = Input.mouseScrollDelta.y;
+        if (Mathf.Abs(scroll) > 0.001f)
+        {
+            move += transform.forward * scroll * scrollZoomSpeed * Time.deltaTime;
+        }
 
         transform.position += move;
     }
