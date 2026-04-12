@@ -3,9 +3,34 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | My project_260320-Nina-Test02-Filter</title>
+    <title>My project_260320-Nina-Test02-Filter</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
+    <style>
+      html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background: #000;
+      }
+      #unity-container {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+      #unity-canvas {
+        width: 100% !important;
+        height: 100% !important;
+        display: block;
+      }
+      /* UI-Branding ausblenden (falls Lizenz erlaubt) */
+      #unity-footer, #unity-logo, #unity-webgl-logo {
+        display: none !important;
+      }
+    </style>
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
@@ -56,11 +81,11 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/260320-Nina-Test02-Filter_build-01.loader.js";
+      var loaderUrl = buildUrl + "/260320-Nina-Test02-Filter_build-02.loader.js";
       var config = {
-        dataUrl: buildUrl + "/260320-Nina-Test02-Filter_build-01.data",
-        frameworkUrl: buildUrl + "/260320-Nina-Test02-Filter_build-01.framework.js",
-        codeUrl: buildUrl + "/260320-Nina-Test02-Filter_build-01.wasm",
+        dataUrl: buildUrl + "/260320-Nina-Test02-Filter_build-02.data",
+        frameworkUrl: buildUrl + "/260320-Nina-Test02-Filter_build-02.framework.js",
+        codeUrl: buildUrl + "/260320-Nina-Test02-Filter_build-02.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "My project_260320-Nina-Test02-Filter",
@@ -99,11 +124,6 @@
         // config.devicePixelRatio = 1;
 
         unityShowBanner('WebGL builds are not supported on mobile devices.');
-      } else {
-        // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
-
-        canvas.style.width = "960px";
-        canvas.style.height = "600px";
       }
 
       loadingBar.style.display = "block";
@@ -115,9 +135,16 @@
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
           loadingBar.style.display = "none";
-          fullscreenButton.onclick = () => {
+          fullscreenButton.onclick = () => unityInstance.SetFullscreen(1);
+
+          // Vollbild beim ersten Klick (Browser verlangt User-Geste)
+          const requestFullscreenOnce = () => {
             unityInstance.SetFullscreen(1);
+            window.removeEventListener('click', requestFullscreenOnce);
+            window.removeEventListener('touchend', requestFullscreenOnce);
           };
+          window.addEventListener('click', requestFullscreenOnce, { once: true });
+          window.addEventListener('touchend', requestFullscreenOnce, { once: true });
         }).catch((message) => {
           alert(message);
         });
